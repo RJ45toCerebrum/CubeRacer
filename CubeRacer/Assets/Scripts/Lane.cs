@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Lane : MonoBehaviour
 {
-    public Vector3 gameSpeed;
+    public Lane leftLane;
+    public Lane rightLane;
 }

@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    public Vector3 playerSpeed;
+    private Rigidbody playerRB;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void Awake() {
+        playerRB = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        playerRB.MovePosition(playerRB.position + playerSpeed * Time.fixedDeltaTime);
+    }
 }
