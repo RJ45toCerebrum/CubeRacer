@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static Lane entryLane;
-    public Lane player1Start, player2Start;
+    public Lane player1StartLane, player2Start;
     public PlayerController player1, player2;
 
     public GameManager Instance { get; private set; }
@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Not alloed to have multiple game managers....");
 
         // setup player one
-        player1.transform.position = player1Start.transform.position;
-        player1.transform.rotation = player1Start.transform.rotation;
-        player1.CurrentLane = player1Start;
+        player1.transform.position = player1StartLane.transform.position;
+        player1.transform.rotation = player1StartLane.transform.rotation;
+        player1.CurrentLane = player1StartLane;
     }
 
 
