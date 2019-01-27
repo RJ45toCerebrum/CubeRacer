@@ -1,58 +1,53 @@
 fileFormatVersion: 2
-guid: 78bbc3f85ad49104fa8d48f54e7f949c
+guid: e9414454676eac4449f25cc3a5a212ac
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: CubeTunnel_ObTunnel
+    100000: CubeTunnel
     100002: //RootNode
-    100004: ObTunnel_obstacle0_Obstacles
-    100006: ObTunnel_Obstacles_obstacle1
-    100008: ObTunnel_Obstacles_obstacle2
-    100010: ObTunnel_Obstacles_obstacle3
-    100012: ObTunnel_Obstacles_obstacle4
-    100014: ObTunnel_Obstacles_obstacle5
-    100016: ObTunnel_Obstacles_obstacle6
-    400000: CubeTunnel_ObTunnel
+    100004: obstacle0
+    100006: obstacle1
+    100008: obstacle2
+    100010: obstacle3
+    100012: obstacle4
+    100014: obstacle5
+    100016: obstacle6
+    100018: Obstacles
+    400000: CubeTunnel
     400002: //RootNode
-    400004: ObTunnel_obstacle0_Obstacles
-    400006: ObTunnel_Obstacles_obstacle1
-    400008: ObTunnel_Obstacles_obstacle2
-    400010: ObTunnel_Obstacles_obstacle3
-    400012: ObTunnel_Obstacles_obstacle4
-    400014: ObTunnel_Obstacles_obstacle5
-    400016: ObTunnel_Obstacles_obstacle6
-    2100000: CubeTunnel_ObTunnelMat
-    2100002: ObTunnel_obstacle0_ObstaclesMat
-    2100004: ObTunnel_Obstacles_obstacle1Mat
-    2100006: ObTunnel_Obstacles_obstacle2Mat
-    2100008: ObTunnel_Obstacles_obstacle3Mat
-    2100010: ObTunnel_Obstacles_obstacle4Mat
-    2100012: ObTunnel_Obstacles_obstacle5Mat
-    2100014: ObTunnel_Obstacles_obstacle6Mat
-    2300000: CubeTunnel_ObTunnel
-    2300002: ObTunnel_obstacle0_Obstacles
-    2300004: ObTunnel_Obstacles_obstacle1
-    2300006: ObTunnel_Obstacles_obstacle2
-    2300008: ObTunnel_Obstacles_obstacle3
-    2300010: ObTunnel_Obstacles_obstacle4
-    2300012: ObTunnel_Obstacles_obstacle5
-    2300014: ObTunnel_Obstacles_obstacle6
-    3300000: CubeTunnel_ObTunnel
-    3300002: ObTunnel_obstacle0_Obstacles
-    3300004: ObTunnel_Obstacles_obstacle1
-    3300006: ObTunnel_Obstacles_obstacle2
-    3300008: ObTunnel_Obstacles_obstacle3
-    3300010: ObTunnel_Obstacles_obstacle4
-    3300012: ObTunnel_Obstacles_obstacle5
-    3300014: ObTunnel_Obstacles_obstacle6
-    4300000: CubeTunnel_ObTunnel
-    4300002: ObTunnel_obstacle0_Obstacles
-    4300004: ObTunnel_Obstacles_obstacle1
-    4300006: ObTunnel_Obstacles_obstacle2
-    4300008: ObTunnel_Obstacles_obstacle3
-    4300010: ObTunnel_Obstacles_obstacle4
-    4300012: ObTunnel_Obstacles_obstacle5
-    4300014: ObTunnel_Obstacles_obstacle6
+    400004: obstacle0
+    400006: obstacle1
+    400008: obstacle2
+    400010: obstacle3
+    400012: obstacle4
+    400014: obstacle5
+    400016: obstacle6
+    400018: Obstacles
+    2100000: lambert1
+    2300000: CubeTunnel
+    2300002: obstacle0
+    2300004: obstacle1
+    2300006: obstacle2
+    2300008: obstacle3
+    2300010: obstacle4
+    2300012: obstacle5
+    2300014: obstacle6
+    3300000: CubeTunnel
+    3300002: obstacle0
+    3300004: obstacle1
+    3300006: obstacle2
+    3300008: obstacle3
+    3300010: obstacle4
+    3300012: obstacle5
+    3300014: obstacle6
+    4300000: CubeTunnel
+    4300002: obstacle0
+    4300004: obstacle1
+    4300006: obstacle2
+    4300008: obstacle3
+    4300010: obstacle4
+    4300012: obstacle5
+    4300014: obstacle6
   externalObjects: {}
   materials:
     importMaterials: 1
