@@ -5,28 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public float playerSpeed;
+    public float lateralSpeed;
     public float forwardSpeed;
-    private Rigidbody playerRB;
+    private float xclampmin = -1, xclampmax = 1;
+    private float yclampmin = -1, yclampmax = 1;
     private Lane currentLane;
 
 
-    // xy-movement time
+    // xy-plane movement time
     private Lane targetLane;
     private bool isMovingLeft = false;
     private bool isMovingRight = false;
     private float distanceTraveled;
     private float distanceToTravel;
 
-    // perspective shift
+    // rotation vars
     private Quaternion Qcw;
     private Quaternion qf;
     private Quaternion Qccw;
     public float rotationalSmoothing;
     private bool needsRotation = false;
 
-
-    // jump 
+    // jump vars
     private float offsetLaneHeight;
     public float jumpHeight = 1f;
     public float jumpTime = 1f;
@@ -56,9 +56,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public Vector2 XClamp
+    {
+        get { return new Vector2(xclampmin, xclampmax); }
+        set {
+            xclampmin = value.x;
+            xclampmax = value.y;
+        }
+    }
 
-    private void Awake() {
-        playerRB = GetComponent<Rigidbody>();
+    public Vector2 YClamp
+    {
+        get { return new Vector2(yclampmin, yclampmax); }
+        set
+        {
+            yclampmin = value.x;
+            yclampmax = value.y;
+        }
+    }
+
+
+    private void Start() {
         Qcw = Quaternion.AngleAxis(-90.0f, Vector3.forward);
         Qccw = Quaternion.AngleAxis(90.0f, Vector3.forward);
     }
@@ -85,7 +103,10 @@ public class PlayerController : MonoBehaviour
             lateralMovement = SideMovement(false);
 
         Vector3 up = Jump();
-        transform.position += (up + lateralMovement + transform.forward * forwardSpeed * Time.fixedDeltaTime);
+
+        //transform.position += (up + lateralMovement + transform.forward * forwardSpeed * Time.fixedDeltaTime);
+        Vector3 np = transform.position + (up + lateralMovement + transform.forward * forwardSpeed * Time.fixedDeltaTime);
+        transform.position = ClampedXYPosition(np);
 
         // rotation
         if (needsRotation && Quaternion.Angle(transform.rotation, qf) > 0.01f)
@@ -94,11 +115,10 @@ public class PlayerController : MonoBehaviour
             needsRotation = false;
     }
 
+
     private void StartMoveLeft()
     {
-        if (!currentLane.leftLane)
-            return;
-        else if (!needsRotation && ShouldRotate(true))
+        if (!needsRotation && ShouldRotate(true))
         {
             if(jumpCount == 1)
                 currentLane = currentLane.leftLane;
@@ -155,10 +175,10 @@ public class PlayerController : MonoBehaviour
         {
             if (!isClose())
             {
-                planeTranslation = transform.right * playerSpeed;
+                planeTranslation = transform.right * lateralSpeed;
                 if (left)
                     planeTranslation = -planeTranslation;
-                distanceTraveled += playerSpeed;
+                distanceTraveled += lateralSpeed;
             }
             else
             {
@@ -174,7 +194,8 @@ public class PlayerController : MonoBehaviour
                 float d = Vector2.Dot(v, u);
                 Vector3 pf = currentLane.transform.position + d * transform.up;
                 pf.z = transform.position.z;
-                transform.position = pf;
+                //transform.position = pf;
+                transform.position = ClampedXYPosition(pf);
             }
         }
 
@@ -240,5 +261,11 @@ public class PlayerController : MonoBehaviour
         if(left)
             return LeftAbsDot() < 0.05f;
         return RightAbsDot() < 0.05f;
+    }
+
+    private Vector3 ClampedXYPosition(Vector3 p){
+        float xnew = Mathf.Clamp(p.x, xclampmin, xclampmax);
+        float ynew = Mathf.Clamp(p.y, yclampmin, yclampmax);
+        return new Vector3(xnew, ynew, p.z);
     }
 }
