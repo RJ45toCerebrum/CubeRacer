@@ -8,6 +8,8 @@ TagManager:
   - Panel
   - GroundPanel
   - GameManager
+  - Obstacle
+  - Boost
   layers:
   - Default
   - TransparentFX
