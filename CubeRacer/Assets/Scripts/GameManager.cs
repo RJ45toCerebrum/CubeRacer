@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Tunnel))]
 public class GameManager : MonoBehaviour
 {
     public static Lane entryLane;
-    public Lane player1StartLane, player2Start;
-    public PlayerController player1, player2;
+    public Lane playerStartLane;
+    public PlayerController player;
 
     public GameManager Instance { get; private set; }
+
+    [SerializeField]
+    private Tunnel tunnel;
 
     private void Awake()
     {
@@ -18,10 +22,12 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Not alloed to have multiple game managers....");
 
         // setup player one
-        player1.transform.position = player1StartLane.transform.position;
-        player1.transform.rotation = player1StartLane.transform.rotation;
-        player1.CurrentLane = player1StartLane;
+        player.transform.position = playerStartLane.transform.position + playerStartLane.transform.up * tunnel.normalOffset;
+        player.transform.rotation = playerStartLane.transform.rotation;
+        player.CurrentLane = playerStartLane;
+        player.OffsetLaneHeight = tunnel.normalOffset;
+        player.XClamp = new Vector2(tunnel.xmin, tunnel.xmax);
+        player.YClamp = new Vector2(tunnel.ymin, tunnel.ymax);
     }
-
 
 }
