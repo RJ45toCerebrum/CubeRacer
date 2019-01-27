@@ -129,7 +129,6 @@ public class PlayerController : MonoBehaviour
 
             qf = Qcw * transform.rotation;
             needsRotation = true;
-            Debug.Log("Should Rotate Left...");
         }
         else if (LeftAbsDot() > 0.05f)
         {
@@ -138,8 +137,6 @@ public class PlayerController : MonoBehaviour
             distanceTraveled = 0;
             distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
         }
-        else
-            Debug.Log("Cant Move Left...");
     }
 
     private void StartMoveRight()
@@ -151,7 +148,6 @@ public class PlayerController : MonoBehaviour
             currentLane = currentLane.rightLane;
             qf = Qccw * transform.rotation;
             needsRotation = true;
-            Debug.Log("Switch Panel Right....");
         }
         else if (RightAbsDot() > 0.05f)
         {
@@ -160,8 +156,6 @@ public class PlayerController : MonoBehaviour
             distanceTraveled = 0;
             distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
         }
-        else
-            Debug.Log("Cant Move Right..");
     }
 
     private bool isClose() {
