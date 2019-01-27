@@ -3,7 +3,7 @@
 --- !u!121 &12100000
 Flare:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Sun1
   m_FlareTexture: {fileID: 2800000, guid: 3db965b2ade7df541afd57470f02dc2c, type: 3}
@@ -12,7 +12,7 @@ Flare:
   - m_ImageIndex: 0
     m_Position: 0
     m_Size: 38.2
-    m_Color: {r: 1, g: 1, b: 1, a: 1}
+    m_Color: {r: 1, g: 0.55223644, b: 0.495283, a: 1}
     m_UseLightColor: 0
     m_Rotate: 1
     m_Zoom: 1
