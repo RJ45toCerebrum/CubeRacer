@@ -11,14 +11,23 @@ public class PlayerController : MonoBehaviour
     private Lane currentLane;
 
 
-    // side-movement time
+    // xy-movement time
     private Lane targetLane;
     private bool isMovingLeft = false;
     private bool isMovingRight = false;
     private float distanceTraveled;
     private float distanceToTravel;
 
-    // jump stuff; ben
+    // perspective shift
+    private Quaternion Qcw;
+    private Quaternion qf;
+    private Quaternion Qccw;
+    public float rotationalSmoothing;
+    private bool needsRotation = false;
+
+
+    // jump 
+    private float offsetLaneHeight;
     public float jumpHeight = 1f;
     public float jumpTime = 1f;
     private float jt = 0;
@@ -34,9 +43,24 @@ public class PlayerController : MonoBehaviour
         set { currentLane = value; }
     }
 
+    public float OffsetLaneHeight
+    {
+        get
+        {
+            return offsetLaneHeight;
+        }
+
+        set
+        {
+            offsetLaneHeight = value;
+        }
+    }
+
 
     private void Awake() {
         playerRB = GetComponent<Rigidbody>();
+        Qcw = Quaternion.AngleAxis(-90.0f, Vector3.forward);
+        Qccw = Quaternion.AngleAxis(90.0f, Vector3.forward);
     }
 
     private void Update()
@@ -45,8 +69,7 @@ public class PlayerController : MonoBehaviour
             StartMoveLeft();
         else if (Input.GetKeyDown(KeyCode.D) && !isMovingRight)
             StartMoveRight();
-
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
+        else if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
             startJumping = true;
         else
             startJumping = false;
@@ -54,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // translation
         Vector3 lateralMovement = Vector3.zero;
         if (isMovingLeft)
             lateralMovement = SideMovement(true);
@@ -61,34 +85,67 @@ public class PlayerController : MonoBehaviour
             lateralMovement = SideMovement(false);
 
         Vector3 up = Jump();
-
         transform.position += (up + lateralMovement + transform.forward * forwardSpeed * Time.fixedDeltaTime);
+
+        // rotation
+        if (needsRotation && Quaternion.Angle(transform.rotation, qf) > 0.01f)
+            transform.rotation = Quaternion.Slerp(transform.rotation, qf, rotationalSmoothing);
+        else
+            needsRotation = false;
     }
 
     private void StartMoveLeft()
     {
         if (!currentLane.leftLane)
             return;
+        else if (!needsRotation && ShouldRotate(true))
+        {
+            if(jumpCount == 1)
+                currentLane = currentLane.leftLane;
+            else {
+                currentLane = currentLane.leftLane.leftLane;
+                jumpCount--;
+            }
 
-        isMovingLeft = true;
-        targetLane = currentLane.leftLane;
-        distanceTraveled = 0;
-        distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
+            qf = Qcw * transform.rotation;
+            needsRotation = true;
+            Debug.Log("Should Rotate Left...");
+        }
+        else if (LeftAbsDot() > 0.05f)
+        {
+            isMovingLeft = true;
+            targetLane = currentLane.leftLane;
+            distanceTraveled = 0;
+            distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
+        }
+        else
+            Debug.Log("Cant Move Left...");
     }
 
     private void StartMoveRight()
     {
         if (!currentLane.rightLane)
             return;
-
-        isMovingRight = true;
-        targetLane = currentLane.rightLane;
-        distanceTraveled = 0;
-        distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
+        else if (!needsRotation && ShouldRotate(false))
+        {
+            currentLane = currentLane.rightLane;
+            qf = Qccw * transform.rotation;
+            needsRotation = true;
+            Debug.Log("Switch Panel Right....");
+        }
+        else if (RightAbsDot() > 0.05f)
+        {
+            isMovingRight = true;
+            targetLane = currentLane.rightLane;
+            distanceTraveled = 0;
+            distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
+        }
+        else
+            Debug.Log("Cant Move Right..");
     }
 
     private bool isClose() {
-        return (distanceToTravel - distanceTraveled) <= 0.01;
+        return (distanceToTravel - distanceTraveled) <= 0.0;
     }
 
     private Vector3 SideMovement(bool left = true)
@@ -108,6 +165,16 @@ public class PlayerController : MonoBehaviour
                 isMovingLeft = isMovingRight =  false;
                 currentLane = targetLane;
                 distanceTraveled = 0;
+
+                // reset the transform because its slightly off
+                Vector2 lp = currentLane.transform.position;
+                Vector2 p = transform.position;
+                Vector2 v = lp - p;
+                Vector2 u = -transform.up;
+                float d = Vector2.Dot(v, u);
+                Vector3 pf = currentLane.transform.position + d * transform.up;
+                pf.z = transform.position.z;
+                transform.position = pf;
             }
         }
 
@@ -119,7 +186,8 @@ public class PlayerController : MonoBehaviour
         Vector3 up = Vector3.zero;
         if (startJumping)
         {
-            up = transform.up * jumpHeight;
+            up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
+            
             if (jumpCount == 0)
                 jt = jumpTime;
             else
@@ -136,9 +204,9 @@ public class PlayerController : MonoBehaviour
                     jt -= Time.deltaTime;
                 else
                 {
-                    // drop
                     jumpCount--;
-                    up = -transform.up * jumpHeight;
+                    up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
+                    up = -up;
                 }
             }
             else if (jumpCount == 2)
@@ -147,13 +215,30 @@ public class PlayerController : MonoBehaviour
                     djt -= Time.deltaTime;
                 else
                 {
-                    // drop
                     jumpCount--;
-                    up = -transform.up * jumpHeight;
+                    up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
+                    up = -up;
                 }
             }
         }
 
         return up;
+    }
+
+    private float LeftAbsDot(){
+        return Mathf.Abs(Vector3.Dot(currentLane.transform.up, currentLane.leftLane.transform.up));
+    }
+
+    private float RightAbsDot(){
+        return Mathf.Abs(Vector3.Dot(currentLane.transform.up, currentLane.rightLane.transform.up));
+    }
+
+    private bool ShouldRotate(bool left)
+    {
+        if (jumpCount == 0)
+            return false;
+        if(left)
+            return LeftAbsDot() < 0.05f;
+        return RightAbsDot() < 0.05f;
     }
 }
