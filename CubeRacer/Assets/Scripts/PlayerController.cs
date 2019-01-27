@@ -5,18 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public Vector3 playerSpeed;
+    public float playerSpeed;
+    public float forwardSpeed;
     private Rigidbody playerRB;
     private Lane currentLane;
-    public float laneSwitchTime = 0.3f;
 
-    // movement time
+
+    // side-movement time
     private Lane targetLane;
-    private Vector2 movementDirection;
-    private float sideMovementTime;
+    private bool isMovingLeft = false;
+    private bool isMovingRight = false;
+    private float distanceTraveled;
+    private float distanceToTravel;
 
+    // jump stuff; ben
+    public float jumpHeight = 1f;
+    public float jumpTime = 1f;
+    private float jt = 0;
+    public float doubleJumpTime = 1f;
+    private float djt = 0;
+    private int jumpCount;
+    private bool startJumping = false;
 
-    private bool isMoving = false;
 
     public Lane CurrentLane
     {
@@ -24,60 +34,126 @@ public class PlayerController : MonoBehaviour
         set { currentLane = value; }
     }
 
+
     private void Awake() {
         playerRB = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A) && !isMovingLeft)
+            StartMoveLeft();
+        else if (Input.GetKeyDown(KeyCode.D) && !isMovingRight)
+            StartMoveRight();
+
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
+            startJumping = true;
+        else
+            startJumping = false;
+    }
+
     private void FixedUpdate()
     {
-        Vector3 PF = Vector3.zero;
-        if (isMoving)
-        {
-            if (!isClose())
-            {
-                Vector2 S = currentLane.transform.position;
-                Vector3 w = (S + (sideMovementTime / laneSwitchTime) * movementDirection);
-                PF += w;
-                sideMovementTime += Time.deltaTime;
-                PF.z += transform.position.z + playerSpeed.z * Time.deltaTime;
-                transform.position = PF;
-            }
-            else
-            {
-                isMoving = false;
-                sideMovementTime = 0;
-                transform.position = transform.position + playerSpeed * Time.fixedDeltaTime;
-                currentLane = targetLane;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && !isMoving)
-            StartMoveLeft();
-        else if (Input.GetKeyDown(KeyCode.D) && !isMoving)
-            StartMoveRight();
-        else
-            transform.position = transform.position + playerSpeed * Time.fixedDeltaTime;
+        Vector3 lateralMovement = Vector3.zero;
+        if (isMovingLeft)
+            lateralMovement = SideMovement(true);
+        else if(isMovingRight)
+            lateralMovement = SideMovement(false);
+
+        Vector3 up = Jump();
+
+        transform.position += (up + lateralMovement + transform.forward * forwardSpeed * Time.fixedDeltaTime);
     }
 
     private void StartMoveLeft()
     {
-        isMoving = true;
+        if (!currentLane.leftLane)
+            return;
+
+        isMovingLeft = true;
         targetLane = currentLane.leftLane;
-        movementDirection = targetLane.transform.position - currentLane.transform.position;
-        sideMovementTime = 0;
+        distanceTraveled = 0;
+        distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
     }
 
     private void StartMoveRight()
     {
-        isMoving = true;
+        if (!currentLane.rightLane)
+            return;
+
+        isMovingRight = true;
         targetLane = currentLane.rightLane;
-        movementDirection = targetLane.transform.position - currentLane.transform.position;
-        sideMovementTime = 0;
+        distanceTraveled = 0;
+        distanceToTravel = (currentLane.transform.position - targetLane.transform.position).magnitude;
     }
 
     private bool isClose() {
-        Vector2 s = transform.position;
-        Vector2 f = targetLane.transform.position;
-        float sqrd = (s - f).sqrMagnitude;
-        return sqrd < 0.01f;
+        return (distanceToTravel - distanceTraveled) <= 0.01;
+    }
+
+    private Vector3 SideMovement(bool left = true)
+    {
+        Vector3 planeTranslation = Vector3.zero;
+        if (isMovingLeft || isMovingRight)
+        {
+            if (!isClose())
+            {
+                planeTranslation = transform.right * playerSpeed;
+                if (left)
+                    planeTranslation = -planeTranslation;
+                distanceTraveled += playerSpeed;
+            }
+            else
+            {
+                isMovingLeft = isMovingRight =  false;
+                currentLane = targetLane;
+                distanceTraveled = 0;
+            }
+        }
+
+        return planeTranslation;
+    }
+
+    private Vector3 Jump()
+    {
+        Vector3 up = Vector3.zero;
+        if (startJumping)
+        {
+            up = transform.up * jumpHeight;
+            if (jumpCount == 0)
+                jt = jumpTime;
+            else
+                djt = doubleJumpTime;
+
+            jumpCount++;
+            startJumping = false;
+        }
+        else
+        {
+            if (jumpCount == 1)
+            {
+                if (jt >= 0f)
+                    jt -= Time.deltaTime;
+                else
+                {
+                    // drop
+                    jumpCount--;
+                    up = -transform.up * jumpHeight;
+                }
+            }
+            else if (jumpCount == 2)
+            {
+                if (djt >= 0f)
+                    djt -= Time.deltaTime;
+                else
+                {
+                    // drop
+                    jumpCount--;
+                    up = -transform.up * jumpHeight;
+                }
+            }
+        }
+
+        return up;
     }
 }

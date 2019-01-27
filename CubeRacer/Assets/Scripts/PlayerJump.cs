@@ -35,10 +35,9 @@ public class PlayerJump : MonoBehaviour {
                 //drop
                 jumpcount--;
                 transform.position -= jump;
-                Debug.Log("Plop!");
-
             }
-        }else if(jumpcount == 2)
+        }
+        else if(jumpcount == 2)
         {
             if (jumpTime >= 0f)
             {
@@ -49,16 +48,11 @@ public class PlayerJump : MonoBehaviour {
                 //drop
                 jumpcount--;
                 transform.position -= jump;
-                Debug.Log("Plop!");
                 jumpTime = 1f;
             }
         }
-        else if(jumpcount > 2)
-        {
-            Debug.Log("Too many jumps!");
-        }
 
-        if ((Input.GetKeyDown(KeyCode.Space)) || (Input.GetKeyDown(KeyCode.W)))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             transform.position += jump;
             jumpcount++;
