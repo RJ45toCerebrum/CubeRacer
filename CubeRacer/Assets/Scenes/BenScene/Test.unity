@@ -1347,10 +1347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffe6c0308f8fd14ab09b89598bd7f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentColor: {r: 0, g: 0, b: 0, a: 0}
-  rend: {fileID: 0}
-  isBlinky: 0
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
+  isBlinky: 1
   blinkTime: 50
+  speed: 5
 --- !u!114 &537549219
 MonoBehaviour:
   m_ObjectHideFlags: 0
