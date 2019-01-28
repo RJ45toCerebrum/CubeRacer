@@ -48,32 +48,34 @@ public class PlayerStats : MonoBehaviour {
         //start boostTimer
         if(boostedBonobo == true)
         {
-            pc.forwardSpeed += 1f;
+            //pc.forwardSpeed += 1f;
+            Time.timeScale = 2f;
 
             if (boostTimer > 0)
                 boostTimer--;
             else
             {
                 //slowdown
-                slowSally = true;
+                Time.timeScale = 1f;
+                //slowSally = true;
                 boostedBonobo = false;
             }
         }
 
         //slowdownTimer
-        if(slowSally == true)
-        {
-            if (slowdownTimer > 0)
-            {
-                slowdownTimer--;
-                pc.forwardSpeed -= 1f;
-            }
-            else
-            {
-                slowSally = false;
-                pc.forwardSpeed = rspeed;
-            }
-        }
+        //if(slowSally == true)
+        //{
+        //    if (slowdownTimer > 0)
+        //    {
+        //        slowdownTimer--;
+        //        pc.forwardSpeed -= 1f;
+        //    }
+        //    else
+        //    {
+        //        slowSally = false;
+        //        pc.forwardSpeed = rspeed;
+        //    }
+        //}
 
         //Game Over
         if(health < 1)
