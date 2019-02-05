@@ -152,11 +152,15 @@ public class PlayerController : MonoBehaviour
 
     private void StartMoveRight()
     {
-        if (!currentLane.rightLane)
-            return;
-        else if (!needsRotation && ShouldRotate(false))
+        if (!needsRotation && ShouldRotate(false))
         {
-            currentLane = currentLane.rightLane;
+            if (jumpCount == 1)
+                currentLane = currentLane.rightLane;
+            else {
+                currentLane = currentLane.rightLane.rightLane;
+                jumpCount--;
+            }
+
             qf = Qccw * transform.rotation;
             needsRotation = true;
         }

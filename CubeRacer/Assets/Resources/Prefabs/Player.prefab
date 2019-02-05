@@ -276,7 +276,6 @@ MonoBehaviour:
   lateralSpeed: 0.8
   forwardSpeed: 75
   rotationalSmoothing: 0.22
-  jumpSmoothingSteps: 5
   jumpHeight: 5
   jumpTime: 1.6
   doubleJumpTime: 1.6
