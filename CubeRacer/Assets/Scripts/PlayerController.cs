@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private float yclampmin = -1, yclampmax = 1;
     private Lane currentLane;
 
-
     // xy-plane movement time
     private Lane targetLane;
     private bool isMovingLeft = false;
@@ -27,6 +26,10 @@ public class PlayerController : MonoBehaviour
     private bool needsRotation = false;
 
     // jump vars
+    private bool startJumping = false;
+    private uint jumpSmoothingSteps = 4;
+    private uint curJumpStep = 0;
+    private Vector3 u;
     private float offsetLaneHeight;
     public float jumpHeight = 1f;
     public float jumpTime = 1f;
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
     public float doubleJumpTime = 1f;
     private float djt = 0;
     private int jumpCount;
-    private bool startJumping = false;
+
 
 
     public Lane CurrentLane
@@ -45,15 +48,8 @@ public class PlayerController : MonoBehaviour
 
     public float OffsetLaneHeight
     {
-        get
-        {
-            return offsetLaneHeight;
-        }
-
-        set
-        {
-            offsetLaneHeight = value;
-        }
+        get { return offsetLaneHeight; }
+        set { offsetLaneHeight = value; }
     }
 
     public Vector2 XClamp
@@ -72,6 +68,20 @@ public class PlayerController : MonoBehaviour
         {
             yclampmin = value.x;
             yclampmax = value.y;
+        }
+    }
+
+    public float RightAbsDot
+    {
+        get {
+            return Mathf.Abs(Vector3.Dot(currentLane.transform.up, currentLane.rightLane.transform.up));
+        }
+    }
+
+    public float LeftAbsDot
+    {
+        get {
+            return Mathf.Abs(Vector3.Dot(currentLane.transform.up, currentLane.leftLane.transform.up));
         }
     }
 
@@ -103,6 +113,7 @@ public class PlayerController : MonoBehaviour
             lateralMovement = SideMovement(false);
 
         Vector3 up = Jump();
+        
 
         //transform.position += (up + lateralMovement + transform.forward * forwardSpeed * Time.fixedDeltaTime);
         Vector3 np = transform.position + (up + lateralMovement + transform.forward * forwardSpeed * Time.fixedDeltaTime);
@@ -130,7 +141,7 @@ public class PlayerController : MonoBehaviour
             qf = Qcw * transform.rotation;
             needsRotation = true;
         }
-        else if (LeftAbsDot() > 0.05f)
+        else if (LeftAbsDot > 0.05f)
         {
             isMovingLeft = true;
             targetLane = currentLane.leftLane;
@@ -149,7 +160,7 @@ public class PlayerController : MonoBehaviour
             qf = Qccw * transform.rotation;
             needsRotation = true;
         }
-        else if (RightAbsDot() > 0.05f)
+        else if (RightAbsDot > 0.05f)
         {
             isMovingRight = true;
             targetLane = currentLane.rightLane;
@@ -188,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 float d = Vector2.Dot(v, u);
                 Vector3 pf = currentLane.transform.position + d * transform.up;
                 pf.z = transform.position.z;
-                //transform.position = pf;
+                // clamp the xy suzh that it is inside the tunnel
                 transform.position = ClampedXYPosition(pf);
             }
         }
@@ -201,8 +212,7 @@ public class PlayerController : MonoBehaviour
         Vector3 up = Vector3.zero;
         if (startJumping)
         {
-            up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
-            
+            this.u = up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
             if (jumpCount == 0)
                 jt = jumpTime;
             else
@@ -210,6 +220,7 @@ public class PlayerController : MonoBehaviour
 
             jumpCount++;
             startJumping = false;
+            curJumpStep = jumpSmoothingSteps;
         }
         else
         {
@@ -221,7 +232,8 @@ public class PlayerController : MonoBehaviour
                 {
                     jumpCount--;
                     up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
-                    up = -up;
+                    this.u = up = -up;
+                    curJumpStep = jumpSmoothingSteps;
                 }
             }
             else if (jumpCount == 2)
@@ -232,20 +244,21 @@ public class PlayerController : MonoBehaviour
                 {
                     jumpCount--;
                     up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
-                    up = -up;
+                    this.u = up = -up;
+                    curJumpStep = jumpSmoothingSteps;
+                    // remove the second step
+                    jt = -1;
                 }
             }
         }
 
+        if (curJumpStep > 0)
+        {
+            curJumpStep--;
+            up = u * (1.0f / jumpSmoothingSteps);
+        }
+
         return up;
-    }
-
-    private float LeftAbsDot(){
-        return Mathf.Abs(Vector3.Dot(currentLane.transform.up, currentLane.leftLane.transform.up));
-    }
-
-    private float RightAbsDot(){
-        return Mathf.Abs(Vector3.Dot(currentLane.transform.up, currentLane.rightLane.transform.up));
     }
 
     private bool ShouldRotate(bool left)
@@ -253,8 +266,8 @@ public class PlayerController : MonoBehaviour
         if (jumpCount == 0)
             return false;
         if(left)
-            return LeftAbsDot() < 0.05f;
-        return RightAbsDot() < 0.05f;
+            return LeftAbsDot < 0.05f;
+        return RightAbsDot < 0.05f;
     }
 
     private Vector3 ClampedXYPosition(Vector3 p){
