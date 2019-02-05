@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     // jump vars
     private bool startJumping = false;
-    private uint jumpSmoothingSteps = 4;
+    private uint jumpSmoothingSteps = 6;
     private uint curJumpStep = 0;
     private Vector3 u;
     private float offsetLaneHeight;
@@ -245,7 +245,6 @@ public class PlayerController : MonoBehaviour
                     jumpCount--;
                     up = transform.up * jumpHeight - (transform.up * offsetLaneHeight);
                     this.u = up = -up;
-                    curJumpStep = jumpSmoothingSteps;
                     // remove the second step
                     jt = -1;
                 }
