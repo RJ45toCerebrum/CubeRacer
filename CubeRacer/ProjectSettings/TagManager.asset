@@ -11,6 +11,7 @@ TagManager:
   - Obstacle
   - Boost
   - Goal
+  - level
   layers:
   - Default
   - TransparentFX
