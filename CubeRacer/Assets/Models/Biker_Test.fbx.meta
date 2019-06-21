@@ -1,0 +1,447 @@
+fileFormatVersion: 2
+guid: c2fdb96bd883ed34a89ea7bef24eada1
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: attitude_hair_lp_wire
+    100002: back_loop_lp
+    100004: back_loop_lp 1
+    100006: back_wheel
+    100008: backTire_bnd
+    100010: belt_lp
+    100012: //RootNode
+    100014: bow_lp
+    100016: bow_lp 1
+    100018: buckle_lp
+    100020: buckle_lp 1
+    100022: front_fork
+    100024: front_tire_glow
+    100026: front_wheel
+    100028: frontTire_bnd
+    100030: geo_GRP
+    100032: glow_buttons_lp
+    100034: ground_glow_and_sticker
+    100036: hair1_bnd
+    100038: hair2_bnd
+    100040: hair3_bnd
+    100042: hair4_bnd
+    100044: hairA1_bnd
+    100046: hairA2_bnd
+    100048: hairA3_bnd
+    100050: hairB1_bnd
+    100052: hairB2_bnd
+    100054: hairB3_bnd
+    100056: head_bnd
+    100058: irises_lp
+    100060: irises_lp1
+    100062: jacket_lp
+    100064: L_ankleTwist_bnd
+    100066: L_ball_bnd
+    100068: L_clavStart_bnd
+    100070: L_elbow_bnd
+    100072: L_eye_bnd
+    100074: L_foot_bnd
+    100076: L_foreArmTwist_bnd
+    100078: L_hand_bnd
+    100080: L_hip_bnd
+    100082: L_hipTwist_bnd
+    100084: L_index1_bnd
+    100086: L_index2_bnd
+    100088: L_index3_bnd
+    100090: L_index4_bnd
+    100092: L_knee_bnd
+    100094: L_middle1_bnd
+    100096: L_middle2_bnd
+    100098: L_middle3_bnd
+    100100: L_middle4_bnd
+    100102: L_pinkie1_bnd
+    100104: L_pinkie2_bnd
+    100106: L_pinkie3_bnd
+    100108: L_pinkie4_bnd
+    100110: L_ring1_bnd
+    100112: L_ring2_bnd
+    100114: L_ring3_bnd
+    100116: L_ring4_bnd
+    100118: L_shoulder_bnd
+    100120: L_shoulderTwist_bnd
+    100122: L_thumb0_bnd
+    100124: L_thumb1_bnd
+    100126: L_thumb2_bnd
+    100128: L_thumb3_bnd
+    100130: L_toe_bnd
+    100132: L_wrist_bnd
+    100134: motorcycle
+    100136: motorcycle_bnd
+    100138: motorcycle_grp
+    100140: neck_bnd
+    100142: pants_lp
+    100144: paracord_lp
+    100146: paracord_lp 1
+    100148: pelvis_bnd
+    100150: R_ankleTwist_bnd
+    100152: R_ball_bnd
+    100154: R_clavStart_bnd
+    100156: R_elbow_bnd
+    100158: R_eye_bnd
+    100160: R_foot_bnd
+    100162: R_foreArmTwist_bnd
+    100164: R_hand_bnd
+    100166: R_hip_bnd
+    100168: R_hipTwist_bnd
+    100170: R_index1_bnd
+    100172: R_index2_bnd
+    100174: R_index3_bnd
+    100176: R_index4_bnd
+    100178: R_knee_bnd
+    100180: R_middle1_bnd
+    100182: R_middle2_bnd
+    100184: R_middle3_bnd
+    100186: R_middle4_bnd
+    100188: R_pinkie1_bnd
+    100190: R_pinkie2_bnd
+    100192: R_pinkie3_bnd
+    100194: R_pinkie4_bnd
+    100196: R_ring1_bnd
+    100198: R_ring2_bnd
+    100200: R_ring3_bnd
+    100202: R_ring4_bnd
+    100204: R_shoulder_bnd
+    100206: R_shoulderTwist_bnd
+    100208: R_thumb0_bnd
+    100210: R_thumb1_bnd
+    100212: R_thumb2_bnd
+    100214: R_thumb3_bnd
+    100216: R_toe_bnd
+    100218: R_wrist_bnd
+    100220: rear_tire_glow
+    100222: root_bnd
+    100224: shades1
+    100226: shades_nose_bridge
+    100228: shirt_lp
+    100230: shoe_lp
+    100232: shoe_lp 1
+    100234: shoe_lp 2
+    100236: shoe_lp1
+    100238: shoes_lp_wire
+    100240: sm_body_lp
+    100242: sm_eyebrows_lp
+    100244: sm_eyes_lp
+    100246: sm_hair_lp
+    100248: sm_hair_short_lp
+    100250: sm_teeth_lower_lp
+    100252: sm_teeth_upper_lp
+    100254: sole_lp
+    100256: sole_lp 1
+    100258: spikes_lp
+    100260: spineRibbon1_bnd
+    100262: spineRibbon2_bnd
+    100264: spineRibbon3_bnd
+    100266: strap_curl_lp
+    100268: strap_curl_lp 1
+    100270: zippers_lp
+    400000: attitude_hair_lp_wire
+    400002: back_loop_lp
+    400004: back_loop_lp 1
+    400006: back_wheel
+    400008: backTire_bnd
+    400010: belt_lp
+    400012: //RootNode
+    400014: bow_lp
+    400016: bow_lp 1
+    400018: buckle_lp
+    400020: buckle_lp 1
+    400022: front_fork
+    400024: front_tire_glow
+    400026: front_wheel
+    400028: frontTire_bnd
+    400030: geo_GRP
+    400032: glow_buttons_lp
+    400034: ground_glow_and_sticker
+    400036: hair1_bnd
+    400038: hair2_bnd
+    400040: hair3_bnd
+    400042: hair4_bnd
+    400044: hairA1_bnd
+    400046: hairA2_bnd
+    400048: hairA3_bnd
+    400050: hairB1_bnd
+    400052: hairB2_bnd
+    400054: hairB3_bnd
+    400056: head_bnd
+    400058: irises_lp
+    400060: irises_lp1
+    400062: jacket_lp
+    400064: L_ankleTwist_bnd
+    400066: L_ball_bnd
+    400068: L_clavStart_bnd
+    400070: L_elbow_bnd
+    400072: L_eye_bnd
+    400074: L_foot_bnd
+    400076: L_foreArmTwist_bnd
+    400078: L_hand_bnd
+    400080: L_hip_bnd
+    400082: L_hipTwist_bnd
+    400084: L_index1_bnd
+    400086: L_index2_bnd
+    400088: L_index3_bnd
+    400090: L_index4_bnd
+    400092: L_knee_bnd
+    400094: L_middle1_bnd
+    400096: L_middle2_bnd
+    400098: L_middle3_bnd
+    400100: L_middle4_bnd
+    400102: L_pinkie1_bnd
+    400104: L_pinkie2_bnd
+    400106: L_pinkie3_bnd
+    400108: L_pinkie4_bnd
+    400110: L_ring1_bnd
+    400112: L_ring2_bnd
+    400114: L_ring3_bnd
+    400116: L_ring4_bnd
+    400118: L_shoulder_bnd
+    400120: L_shoulderTwist_bnd
+    400122: L_thumb0_bnd
+    400124: L_thumb1_bnd
+    400126: L_thumb2_bnd
+    400128: L_thumb3_bnd
+    400130: L_toe_bnd
+    400132: L_wrist_bnd
+    400134: motorcycle
+    400136: motorcycle_bnd
+    400138: motorcycle_grp
+    400140: neck_bnd
+    400142: pants_lp
+    400144: paracord_lp
+    400146: paracord_lp 1
+    400148: pelvis_bnd
+    400150: R_ankleTwist_bnd
+    400152: R_ball_bnd
+    400154: R_clavStart_bnd
+    400156: R_elbow_bnd
+    400158: R_eye_bnd
+    400160: R_foot_bnd
+    400162: R_foreArmTwist_bnd
+    400164: R_hand_bnd
+    400166: R_hip_bnd
+    400168: R_hipTwist_bnd
+    400170: R_index1_bnd
+    400172: R_index2_bnd
+    400174: R_index3_bnd
+    400176: R_index4_bnd
+    400178: R_knee_bnd
+    400180: R_middle1_bnd
+    400182: R_middle2_bnd
+    400184: R_middle3_bnd
+    400186: R_middle4_bnd
+    400188: R_pinkie1_bnd
+    400190: R_pinkie2_bnd
+    400192: R_pinkie3_bnd
+    400194: R_pinkie4_bnd
+    400196: R_ring1_bnd
+    400198: R_ring2_bnd
+    400200: R_ring3_bnd
+    400202: R_ring4_bnd
+    400204: R_shoulder_bnd
+    400206: R_shoulderTwist_bnd
+    400208: R_thumb0_bnd
+    400210: R_thumb1_bnd
+    400212: R_thumb2_bnd
+    400214: R_thumb3_bnd
+    400216: R_toe_bnd
+    400218: R_wrist_bnd
+    400220: rear_tire_glow
+    400222: root_bnd
+    400224: shades1
+    400226: shades_nose_bridge
+    400228: shirt_lp
+    400230: shoe_lp
+    400232: shoe_lp 1
+    400234: shoe_lp 2
+    400236: shoe_lp1
+    400238: shoes_lp_wire
+    400240: sm_body_lp
+    400242: sm_eyebrows_lp
+    400244: sm_eyes_lp
+    400246: sm_hair_lp
+    400248: sm_hair_short_lp
+    400250: sm_teeth_lower_lp
+    400252: sm_teeth_upper_lp
+    400254: sole_lp
+    400256: sole_lp 1
+    400258: spikes_lp
+    400260: spineRibbon1_bnd
+    400262: spineRibbon2_bnd
+    400264: spineRibbon3_bnd
+    400266: strap_curl_lp
+    400268: strap_curl_lp 1
+    400270: zippers_lp
+    2100000: lambert2
+    2100002: lambert21
+    2100004: lambert24
+    2100006: lambert22
+    2100008: aiWireframe2
+    2100010: ai_sunnies
+    2100012: aishoes_sunglasses
+    2100014: lambert23
+    4300000: motorcycle
+    4300002: front_fork
+    4300004: back_wheel
+    4300006: rear_tire_glow
+    4300008: ground_glow_and_sticker
+    4300010: front_tire_glow
+    4300012: front_wheel
+    4300014: sm_hair_short_lp
+    4300016: sm_hair_lp
+    4300018: sm_teeth_lower_lp
+    4300020: sm_teeth_upper_lp
+    4300022: sm_body_lp
+    4300024: sm_eyes_lp
+    4300026: sm_eyebrows_lp
+    4300028: irises_lp
+    4300030: belt_lp
+    4300032: spikes_lp
+    4300034: zippers_lp
+    4300036: glow_buttons_lp
+    4300038: pants_lp
+    4300040: jacket_lp
+    4300042: shirt_lp
+    4300044: irises_lp1
+    4300046: shades1
+    4300048: shades_nose_bridge
+    4300050: shoe_lp
+    4300052: paracord_lp
+    4300054: buckle_lp
+    4300056: strap_curl_lp
+    4300058: sole_lp
+    4300060: back_loop_lp
+    4300062: bow_lp
+    4300064: shoe_lp
+    4300066: paracord_lp
+    4300068: buckle_lp
+    4300070: strap_curl_lp
+    4300072: sole_lp
+    4300074: back_loop_lp
+    4300076: bow_lp
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: back_loop_lp
+    13700002: back_loop_lp 1
+    13700004: back_wheel
+    13700006: belt_lp
+    13700008: bow_lp
+    13700010: bow_lp 1
+    13700012: buckle_lp
+    13700014: buckle_lp 1
+    13700016: front_fork
+    13700018: front_tire_glow
+    13700020: front_wheel
+    13700022: glow_buttons_lp
+    13700024: ground_glow_and_sticker
+    13700026: irises_lp
+    13700028: irises_lp1
+    13700030: jacket_lp
+    13700032: motorcycle
+    13700034: pants_lp
+    13700036: paracord_lp
+    13700038: paracord_lp 1
+    13700040: rear_tire_glow
+    13700042: shades1
+    13700044: shades_nose_bridge
+    13700046: shirt_lp
+    13700048: shoe_lp 1
+    13700050: shoe_lp 2
+    13700052: sm_body_lp
+    13700054: sm_eyebrows_lp
+    13700056: sm_eyes_lp
+    13700058: sm_hair_lp
+    13700060: sm_hair_short_lp
+    13700062: sm_teeth_lower_lp
+    13700064: sm_teeth_upper_lp
+    13700066: sole_lp
+    13700068: sole_lp 1
+    13700070: spikes_lp
+    13700072: strap_curl_lp
+    13700074: strap_curl_lp 1
+    13700076: zippers_lp
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
